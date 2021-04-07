@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { store, persistor } from './redux/store'
 import Moment from 'moment'
 
+import './i18n'
 import './index.scss'
 import 'moment/locale/ro'
 
@@ -23,7 +24,9 @@ ReactDOM.render(
   <ReduxProvider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Router>
-        <App />
+        <Suspense fallback={<div>...</div>}>
+          <App />
+        </Suspense>
       </Router>
     </PersistGate>
   </ReduxProvider>,
